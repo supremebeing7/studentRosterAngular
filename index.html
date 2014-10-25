@@ -12,9 +12,27 @@
   <div class="container" ng-controller="StudentsCtrl">
     <div class="row">
       <div class="col-md-6">
-        <h2>Student List</h2>
+        <h2>New Student</h2>
+        <form ng-submit="addStudent()" class="form-inline" role="form">
+          <div class="form-group">
+            <input type="text" ng-model="studentName" class="form-control" id="student-name" placeholder="Enter name">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-6" ng-show="students.length">
+        <h4>Search Students</h4>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <input ng-model="query" type="text" class="form-control" id="student-name" placeholder="Search">
+          </div>
+        </form>
+      </div>
+      <div class="col-md-6" ng-show="students.length">
+        <h2 ng-show="students.length && filtered.length">Student List</h2>
+        <h2 ng-show="students.length && !filtered.length">No Matches</h2>
         <ul>
-          <li ng-repeat="item in students">
+          <li ng-repeat="item in filtered = (students | filter:query)">
             <span ng-hide="editing" ng-click="editing = true">
               {{item.name}} <a ng-click="deleteStudent(item)">Delete</a>
             </span>
@@ -25,15 +43,6 @@
             </span>
           </li>
         </ul>
-      </div>
-      <div class="col-md-6">
-        <h2>New Student</h2>
-        <form ng-submit="addStudent()" class="form-inline" role="form">
-          <div class="form-group">
-            <input type="text" ng-model="studentName" class="form-control" id="student-name" placeholder="Enter name">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
       </div>
     </div>
   </div>
