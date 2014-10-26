@@ -1,0 +1,10 @@
+temp/
+node_modules/
+components/bower_components/
+_SpecRunner.html
+.DS_Store
+deploy_dev.sh
+test-results.xml
+.sass-cache/
+app.css
+app.css.map
